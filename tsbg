@@ -1,0 +1,48 @@
+-- LocalScript
+
+-- Create a ScreenGui
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "BanScreen"
+screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+-- Create a Frame for the ban message
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(1, 0, 1, 0)
+frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+frame.BackgroundTransparency = 0.5
+frame.Parent = screenGui
+
+-- Create a TextLabel to display the ban message
+local textLabel = Instance.new("TextLabel")
+textLabel.Size = UDim2.new(1, 0, 1, 0)
+textLabel.Position = UDim2.new(0, 0, 0, 0)
+textLabel.BackgroundTransparency = 1
+textLabel.TextColor3 = Color3.fromRGB(255, 0, 0)
+textLabel.TextStrokeTransparency = 0.5
+textLabel.TextScaled = true
+textLabel.Text = "You have been banned from this experience!\n\nYou are banned for: 50934956354 DAYS\n\nIf you were falsely banned, please appeal at discord.gg/tsbg"
+textLabel.Parent = frame
+
+-- Disable player controls
+local player = game.Players.LocalPlayer
+local humanoid = player.Character and player.Character:FindFirstChildOfClass("Humanoid")
+
+if humanoid then
+    humanoid.PlatformStand = true
+end
+
+-- Freeze screen
+local function freeze()
+    while true do
+        -- Create a new, transparent, input frame to block player input
+        local blockFrame = Instance.new("Frame")
+        blockFrame.Size = UDim2.new(1, 0, 1, 0)
+        blockFrame.BackgroundTransparency = 1
+        blockFrame.Parent = screenGui
+        
+        wait(0.1)
+    end
+end
+
+-- Start freezing
+freeze()
