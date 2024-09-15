@@ -1,48 +1,113 @@
--- LocalScript
+-- Obfuscated Script with Extra Random Operations and Binary Codes Display
 
--- Create a ScreenGui
-local screenGui = Instance.new("ScreenGui")
-screenGui.Name = "BanScreen"
-screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-
--- Create a Frame for the ban message
-local frame = Instance.new("Frame")
-frame.Size = UDim2.new(1, 0, 1, 0)
-frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-frame.BackgroundTransparency = 0.5
-frame.Parent = screenGui
-
--- Create a TextLabel to display the ban message
-local textLabel = Instance.new("TextLabel")
-textLabel.Size = UDim2.new(1, 0, 1, 0)
-textLabel.Position = UDim2.new(0, 0, 0, 0)
-textLabel.BackgroundTransparency = 1
-textLabel.TextColor3 = Color3.fromRGB(255, 0, 0)
-textLabel.TextStrokeTransparency = 0.5
-textLabel.TextScaled = true
-textLabel.Text = "You have been banned from this experience!\n\nYou are banned for: 50934956354 DAYS\n\nIf you were falsely banned, please appeal at discord.gg/tsbg"
-textLabel.Parent = frame
-
--- Disable player controls
-local player = game.Players.LocalPlayer
-local humanoid = player.Character and player.Character:FindFirstChildOfClass("Humanoid")
-
-if humanoid then
-    humanoid.PlatformStand = true
-end
-
--- Freeze screen
-local function freeze()
+-- Function to create and display binary codes in a GUI
+local function displayRandomBinaryCodes()
+    local screenGui = Instance.new("ScreenGui")
+    screenGui.Name = "BinaryCodesGui"
+    screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+    
+    local textLabel = Instance.new("TextLabel")
+    textLabel.Name = "BinaryCodesLabel"
+    textLabel.Size = UDim2.new(1, 0, 1, 0)
+    textLabel.Position = UDim2.new(0, 0, 0, 0)
+    textLabel.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    textLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+    textLabel.TextScaled = true
+    textLabel.TextWrapped = true
+    textLabel.Text = "Random Binary Codes:\n"
+    textLabel.Parent = screenGui
+    
+    -- Function to generate a random binary code
+    local function generateRandomBinaryCode(length)
+        local binaryCode = ""
+        for i = 1, length do
+            binaryCode = binaryCode .. math.random(0, 1)
+        end
+        return binaryCode
+    end
+    
+    -- Update binary codes every few seconds
     while true do
-        -- Create a new, transparent, input frame to block player input
-        local blockFrame = Instance.new("Frame")
-        blockFrame.Size = UDim2.new(1, 0, 1, 0)
-        blockFrame.BackgroundTransparency = 1
-        blockFrame.Parent = screenGui
-        
-        wait(0.1)
+        local randomBinaryCode = generateRandomBinaryCode(8)  -- 8-bit binary code
+        textLabel.Text = textLabel.Text .. randomBinaryCode .. "\n"
+        wait(2)  -- Update every 2 seconds
     end
 end
 
--- Start freezing
-freeze()
+-- Random Math Operations
+local function randomMathOperations()
+    local a = math.random(1, 100)
+    local b = math.random(1, 100)
+    local c = math.random(1, 10)
+    local result = (a * b + math.sqrt(a) - math.abs(b)) / (c + 1)
+    print("Random Math Result: " .. result)
+end
+
+-- Random String Manipulations
+local function randomStringManipulations()
+    local str = "RandomString"
+    local reversedStr = str:reverse()
+    local upperStr = str:upper()
+    local subStr = str:sub(1, 6)
+    print("Reversed String: " .. reversedStr)
+    print("Uppercase String: " .. upperStr)
+    print("Substring: " .. subStr)
+end
+
+-- Random Table Operations
+local function randomTableOperations()
+    local tbl = {math.random(1, 10), math.random(1, 10), math.random(1, 10)}
+    table.insert(tbl, math.random(1, 10))
+    table.remove(tbl, math.random(1, #tbl))
+    table.sort(tbl)
+    print("Sorted Table Contents: " .. table.concat(tbl, ", "))
+end
+
+-- Random File Operations (No actual file operations in Roblox but shown for obfuscation)
+local function randomFileOperations()
+    -- Placeholder for file operations
+    print("Pretend we are reading a file...")
+    local fileContent = "Some random content that doesn't actually exist."
+    print("File Content: " .. fileContent)
+end
+
+-- Random Game Object Manipulations
+local function randomGameObjectManipulations()
+    local part = Instance.new("Part")
+    part.Size = Vector3.new(math.random(1, 10), math.random(1, 10), math.random(1, 10))
+    part.Position = Vector3.new(math.random(-50, 50), math.random(-50, 50), math.random(-50, 50))
+    part.Anchored = true
+    part.Parent = workspace
+    print("Created a random part in the workspace.")
+end
+
+-- Main Ban Function
+local function banPlayer(player)
+    if player and player:IsA("Player") then
+        -- Banning logic
+        local userId = player.UserId
+        -- Add userId to a ban list or database
+        -- This is a placeholder. Replace with actual banning logic.
+        print("Banning player with UserId: " .. userId)
+        
+        -- Optionally, you can kick the player out
+        player:Kick("You have been banned from this game.")
+    else
+        print("Invalid player")
+    end
+end
+
+-- Example usage
+-- Replace with actual player reference in your game
+local playerToBan = game:GetService("Players"):FindFirstChild("PlayerName") -- Change "PlayerName" to the actual player's name
+banPlayer(playerToBan)
+
+-- Execute Random Functions
+randomMathOperations()
+randomStringManipulations()
+randomTableOperations()
+randomFileOperations()
+randomGameObjectManipulations()
+
+-- Display Random Binary Codes
+displayRandomBinaryCodes()
